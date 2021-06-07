@@ -1,4 +1,4 @@
-function plot_addStatsBar_time(pValue, h0, currAxisHandle, tc)
+function plot_addStatsBar_time(currAxisHandle, pValue, h0, tc)
 
    %% ADD STATS
     % sigPos is the lower and upper bound of the part of the plot        
@@ -6,6 +6,7 @@ function plot_addStatsBar_time(pValue, h0, currAxisHandle, tc)
     ylim(currAxisHandle, [1.1*yLims_curr(1) yLims_curr(2)]); 
     yLims = ylim(currAxisHandle);
     sigPos = min(yLims) + diff(yLims).*[0 .1];
+    %sigPos = yLims;
 
     % coloring in the uncorrected t-values
     tHotColMap = jmaColors('pval'); 
@@ -14,7 +15,7 @@ function plot_addStatsBar_time(pValue, h0, currAxisHandle, tc)
     pixWidth = 20;
     pBar = repmat( pValue', pixWidth, 1);
     hImg = image([min(tc)+ 1, max(tc)],[sigPos(1), sigPos(2)], pBar, ...
-        'CDataMapping', 'scaled', 'Parent', currAxisHandle, 'AlphaData', 0.7);
+        'CDataMapping', 'scaled', 'Parent', currAxisHandle, 'AlphaData', 0.5);
     
     colormap(currAxisHandle, tHotColMap);
     cMapMax = .05 + 2*.05/(size(tHotColMap, 1));
@@ -23,9 +24,7 @@ function plot_addStatsBar_time(pValue, h0, currAxisHandle, tc)
     pos = get(currAxisHandle, 'position');
     cb = colorbar(currAxisHandle);
     set(cb, 'position',[pos(1) + pos(3) 2*pos(2) .02 .1])
-    
-    % mark significant regions
-    
+        
     %identify contiguous ones
     regionIdx = bwlabel(h0);
     for m = 1:max(regionIdx)

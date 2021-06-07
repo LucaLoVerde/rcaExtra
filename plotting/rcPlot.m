@@ -1,4 +1,4 @@
-function rcPlot(rcaDataIn, tc, A)
+function rcPlot_time(rcaDataIn, tc, A)
 
     nComp = size(A, 2);
     rcaDataMean = cellfun(@(x) nanmean(x, 3), rcaDataIn, 'uni', false);
