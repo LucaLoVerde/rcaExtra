@@ -18,3 +18,4 @@ Make sure to have the two required repositories cloned and on your MATLAB path. 
 * Diagnostics/sanity check: Writing a function to extract a re-projected single channel as a sanity check for the underlying RCA computations
 * `rcaExtra_plotSweepProjAmplitudesSummary_beta()`: this function is a temporary summary plot for swept data. It will plot sweep amplitudes and phases for each reliable component and frequency. **Error estimations in these plots needs to be fixed: at the moment, it will just re-calculate the standard error of the means of the individual participants' sweeps and use that as error estimates around the signal amplitudes.**
 * Diagnostics/sanity check: fix the diagnostic RCA plots produced by the `rca` toolbox
+* Incorporate mrC's `plotOnEgi()` plotting function into the repository: it makes sense to integrate the topography plotting capabilities from `mrC`, as it is currently a requirement only because of this plotting function
