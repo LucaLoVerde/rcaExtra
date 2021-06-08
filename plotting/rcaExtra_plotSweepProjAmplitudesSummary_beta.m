@@ -1,11 +1,14 @@
 % function outHandle = rcaExtra_sweepPlotProjAmplitudes_beta(rcaResult)
-function rcaExtra_plotSweepProjAmplitudesSummary_beta(rcaResult, nRcs_in, nFs_in, lockAxes)
+function rcaExtra_plotSweepProjAmplitudesSummary_beta(rcaResult, nRcs_in, nFs_in, lockAxes, phaseAspRatio)
 % as of now, it will plot all frequencies for all RCs from the supplied
 % rcaResult struct. At the moment, the high noise estimates are used to
 % plot the noise ceiling.
 % // TODO: abscissa should reflect actual quantities
 % LLV
 
+if nargin < 5 || isempty(phaseAspRatio)
+    phaseAspRatio = 5;
+end
 if nargin < 4 || isempty(lockAxes)
     lockAxes = true;
 end
@@ -99,7 +102,7 @@ for rc_idx = 1:nRcs
         hold on;
         plot(xx, yyPh(:, f_idx, rc_idx), '-k', 'LineWidth', 1, ...
             'MarkerSize', 20);
-        pbaspect([13 1 1]);
+        pbaspect([phaseAspRatio 1 1]);
         ylim([-180, 180]);
         yticklabels([-180, 0, 180]);
         if f_idx > 1
