@@ -12,7 +12,27 @@ At the present moment, this toolbox depends on the following MATLAB toolboxes:
 Make sure to have the two required repositories cloned and on your MATLAB path. Be careful to remove any reference to the original rcaExtra from your MATLAB path before using this version in order to avoid conflicts.
 
 ## Basic usage
-!!! PLACEHOLDER !!!
+As for the original rcaExtra toolbox, beginning the analyses involves creating *at least* two scripts, for now contained in the `examples` project subfolder:
+* A main analysis frontend, usually prefixed with `main_`
+* A loading function, usually prefixed with `loadExperimentInfo_`
+
+The main frontend function is used to set the required parameters and arguments and to call the proper analysis routines. The loading function is used to specify and control lower-level details about the data, such as participants ID exclusions, xDiva exports subfolder names for loading the data and some other secondary parameter. You can find a generic loading function template generator in `common/rcaExtra_genStructureTemplate()`. This function also contains descriptions of the main required parameters. In case of custom, non-standard data export organization, it is possible to provide a custom low-level data loader to handle such cases.
+
+The idea is to have different main analyses frontends and loading functions for different projects or re-analyses of a given project. 
+
+After setting these two required components up, the analyses should be started by calling the `main_` frontend function, and specifying the **EEG source data location** and the **RCA output data location**: the EEG source data location should be the root folder of your exports (i.e. the folder which contains each participants' xDiva data export subfolders). The output location will be populated with a few subfolder: `RCA/`, containing data structures pertinent to RCA results; `FIG/`, containing exported diagnostics plot (needs to be fixed and tweaked); and `MAT/`, which is populated with the participants loaded data.
+
+### Averaging RCA results
+After the core RCA computations are complete, it will be possible to review the results by averaging the data. This is a **separate step** for now.
+As of now, the main averaging function for sweeps is `rcaExtra_computeSweepAverages()` which takes an *individual* condition RCA result data structure and returns the same structure populated with averages. If you performed RCA on data containing multiple conditions, you should just map `rcaExtra_computeSweepAverages()` to each condition's result data structure. For example, if you have your RCA results in a cell array with one element per condition, and each element being an RCA result data structure, you can use MATLAB's cellfun:
+```matlab
+myRCAAverages = cellfun(@(x) rcaExtra_computeSweepAverages(x), myRCAresults);
+```
+which will call the sweep average function on each individual condition's RCA result structure.
+
+### Visualizing sweep topographies, amplitudes and phases
+I've included an interim "summary plot" function, which you can find in the `plotting/` project subfolders, named `rcaExtra_plotSweepProjAmplitudesSummary_beta()`. This function (which is an active work in progress) will take the following mandatory argument: an **individual RC_averages** structure for a given condition (as output from the aforementioned averaging procedure) pertaining to a single condition. The function also accepts a few optional arguments, such as the number of RCs and frequencies you want to see in the summary plot (**warning**, this is only for debugging, as it is definitely not the same thing as running RCA on a different number of RCs or frequencies), or whether to lock all the amplitude ordinate axes for easier visual comparison, and the phase-to-amplitude vertical relative aspect ratio. 
+This function is being actively worked on, so you have my apologies for any sudden breaking change (which will eventually be reported in this README).
 
 ## TODOs
 * Diagnostics/sanity check: Writing a function to extract a re-projected single channel as a sanity check for the underlying RCA computations
