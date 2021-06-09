@@ -1,5 +1,6 @@
 function [proj, subj, w] = averageProjectSweep(dataIn, nBins)
 % Alexandra Yakovleva, Stanford University 2012-1020
+% modified by LLV
     nCnd = size(dataIn, 2);
     proj = cell(nCnd, 1);
     subj = cell(size(dataIn));
