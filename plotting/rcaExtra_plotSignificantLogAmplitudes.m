@@ -159,4 +159,3 @@ function figureHandles = rcaExtra_plotSignificantLogAmplitudes(varargin)
         rcaExtra_displayError(err);
     end
 end
-

@@ -41,9 +41,6 @@ function plotRCTopoMaps(axHandle, topoMaps, nRows)
         end
     catch err
         fprintf('call to plotOnEgi() failed. Plotting electrode values in a 1D style instead.\n');
-        disp(err);
-        err.stack.name
-        err.stack.line
         for c = 1:nComp, subplot(nRows, nComp, c); plot(topoMaps(:, c), '*k-'); end
         title(['RC' num2str(c)]);
     end
