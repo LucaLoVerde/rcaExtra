@@ -4,7 +4,7 @@ function [cellData,indF,indB,noiseCell1,noiseCell2,freqLabels,binLabels,chanIncl
     if nargin < 4 || isempty(binsToUse), binsToUse = []; end
     if nargin < 3 || isempty(freqsToUse), freqsToUse = []; end
 
-    if ~strcmp(pathname(end), filesep), pathname=cat(2, pathname, filesep); end
+    if ~strcmp(pathname(end), '/'), pathname=cat(2, pathname, '/'); end
 
     switch dataType % check for correct data type
         case {'DFT','RLS'}
