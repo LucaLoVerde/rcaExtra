@@ -43,5 +43,5 @@ This function is being actively worked on, so you have my apologies for any sudd
 * Clean up warnings and messages produced by RCA backbone
 
 ## Changes compared to the upstream svndl/rcaExtra toolbox
-I've been trying to minimize any changes to the toolbox as a whole while implementing sweep functionality. The changes consist mainly of the addition of a dedicated `sweep` subfolder, containing functions dedicated to the sweep RCA analyses. 
+I've been trying to minimize any changes to the toolbox as a whole while implementing sweep functionality. The changes consist mainly of the addition of a dedicated `sweep` subfolder, containing functions aimed at the sweep RCA analyses. 
 A list the changes made to the common rcaExtra infrastructure will be provided at a later time.
