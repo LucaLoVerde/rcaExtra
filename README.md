@@ -3,6 +3,7 @@ This repository contains a fork of [svndl/rcaExtra](https://github.com/svndl/rca
 
 ## About this fork
 This fork is intended to hosts extensions to cover sweep EEG experiments with the rcaExtra toolbox, as the original rcaExtra only covers steady-state time- and frequency-domain EEG data. I'm keeping this as a fork for now, with the aim of merging the extensions into the main svndl/rcaExtra once the code is deemed clean and stable enough. The extension is intended to be fully compatible with the original rcaExtra toolbox.
+The active branch is `feature_sweep`. The `main` branch of this repository will be kept in sync with upstream `svndl/rcaExtra` repository.
 
 ## Requirements for using the toolbox
 At the present moment, this toolbox depends on the following MATLAB toolboxes:
