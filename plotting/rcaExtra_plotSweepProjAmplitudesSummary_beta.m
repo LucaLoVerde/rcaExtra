@@ -1,9 +1,10 @@
-% function outHandle = rcaExtra_sweepPlotProjAmplitudes_beta(rcaResult)
 function rcaExtra_plotSweepProjAmplitudesSummary_beta(rcaResult, nRcs_in, nFs_in, lockAxes, phaseAspRatio)
 % as of now, it will plot all frequencies for all RCs from the supplied
 % rcaResult struct. At the moment, the high noise estimates are used to
 % plot the noise ceiling.
-% // TODO: abscissa should reflect actual quantities
+% // TODO: abscissa should reflect actual quantities (needs to fetch info)
+% // TODO: tiledlayout() might not be flexible enough, might have to
+% rewrite the plot panel layout part
 % LLV
 
 if nargin < 5 || isempty(phaseAspRatio)
@@ -23,10 +24,9 @@ xx = rcaResult.rcaSettings.useBins;
 yy = rcaResult.projAvg.amp;
 warning('*** temporarily recomputing std of projected amplitudes to plot SEM estimates! ***');
 % yyErr = rcaResult.projAvg.errA;
-yyErr = nan(size(yy));
+% yyErr = nan(size(yy));
 subjProjAmpls = squeeze(rcaResult.subjProj.amp);
 yyErr = std(subjProjAmpls, [], 4) ./ sqrt(size(subjProjAmpls, 4));
-warning('*** end temporary SEM error estimation ***');
 ampl_limits = [min(yy, [], 'all'), max(yy, [], 'all')];
 yyPh = rad2deg(rcaResult.projAvg.phase);
 topo = rcaResult.A;
@@ -52,7 +52,6 @@ cndNmb = rcaResult.rcaSettings.useCnds;
 cndString = rcaResult.rcaSettings.label;
 
 tl = tiledlayout(nRcs * 2, nF + 1, 'TileSpacing', 'compact', 'Padding', 'compact');
-
 
 for rc_idx = 1:nRcs
     tmp = nexttile([2 1]);
@@ -81,13 +80,8 @@ for rc_idx = 1:nRcs
             ylim(ampl_limits);
         end
         % pbaspect([1.5 1 1]);
-        %         if f_idx > 1
-        %
-        %         end
-        %         if rc_idx < nRcs
         xticks(xx);
         xticklabels([]);
-        %         end
         if lockAxes && f_idx > 1
             currYTicks = yticks;
             yticklabels([]);
@@ -96,7 +90,7 @@ for rc_idx = 1:nRcs
         set(gca, 'FontSize', 14, 'FontName', 'Helvetica');
         hold off;
     end
-    % phases (WIP)
+    % phases
     for f_idx = 1:nF
         nexttile;
         hold on;
