@@ -40,6 +40,7 @@ This function is being actively worked on, so you have my apologies for any sudd
 * Diagnostics/sanity check: fix the diagnostic RCA plots produced by the `rca` toolbox
 * Incorporate mrC's `plotOnEgi()` plotting function into the repository: it makes sense to integrate the topography plotting capabilities from `mrC`, as it is currently a requirement only because of this plotting function
 * Write proper comments and documentation about new code
+* Clean up warnings and messages produced by RCA backbone
 
 ## Changes compared to the upstream svndl/rcaExtra toolbox
 I've been trying to minimize any changes to the toolbox as a whole while implementing sweep functionality. The changes consist mainly of the addition of a dedicated `sweep` subfolder, containing functions dedicated to the sweep RCA analyses. 
