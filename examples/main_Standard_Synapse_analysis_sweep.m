@@ -1,12 +1,12 @@
 function rcResult_condition = main_Standard_Synapse_analysis_sweep
+% function [rcResult_condition, rcResult_avgs] = main_Standard_Synapse_analysis_sweep
 % modified by LLV
 %% define experimentInfo
 
-experimentName = 'Exports_Synapse';
+experimentName = 'Exports_Synapse'; % used to call the relevant 'loadExperimentInfo_EXPNAME.m'
 
 % load up expriment info specified in loadExperimentInfo_experimentName
 % matlab file
-
 try
     analysisStruct = feval(['loadExperimentInfo_' experimentName]);
 catch err
@@ -15,7 +15,6 @@ catch err
     disp('Unable to load specific expriment settings, loading default');
     analysisStruct = loadExperimentInfo_Default;
 end
-
 
 analysisStruct.domain = 'sweep';
 loadSettings = rcaExtra_getDataLoadingSettings(analysisStruct);
@@ -37,15 +36,13 @@ rcSettings.subjList = subjList;
 rcSettings.useBins = loadSettings.useBins;
 rcSettings.nBins = numel(rcSettings.useBins);
 rcSettings.useFrequencies = loadSettings.useFrequencies;
+rcSettings.nComp = 4; % overriding desired RC components to 4
 nConditions = size(sensorData, 2);
-% nConditions = 4; % LLV: bypass for AttnMonocBinoc dataset
 rcSettings_sweep_condition = cell(1, nConditions);
 rcResult_condition = cell(1, nConditions);
-rcResult_avgs = cell(1, nConditions);
+% rcResult_avgs = cell(1, nConditions);
 
 rcSettings_sweep = rcSettings;
-
-
 
 for condIdx = 1:nConditions
     rcSettings_sweep_condition{condIdx} = rcSettings_sweep;
@@ -59,10 +56,9 @@ for condIdx = 1:nConditions
 end
 
 % LLV: average sweeps together
-rcResult_avgs = cellfun(@(x) rcaExtra_computeSweepAverages(x), rcResult_condition);
+% rcResult_avgs = cellfun(@(x) rcaExtra_computeSweepAverages(x), rcResult_condition);
 % plot results
 % LLV: beta sweep amplitude and phase plots plus topos for all conds
 % rcaExtra_plotSweepProjAmplitudesSummary_beta(rcResult_avgs(condIdx));
-
 
 end
