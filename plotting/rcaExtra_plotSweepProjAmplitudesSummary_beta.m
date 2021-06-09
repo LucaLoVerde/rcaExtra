@@ -22,7 +22,6 @@ end
 
 xx = rcaResult.rcaSettings.useBins;
 yy = rcaResult.projAvg.amp;
-nSubjs = numel(rcaResult.rcaSettings.subjList);
 warning('*** temporarily recomputing std of projected amplitudes to plot SEM estimates! ***');
 % yyErr = rcaResult.projAvg.errA;
 % yyErr = nan(size(yy));
@@ -111,6 +110,6 @@ for rc_idx = 1:nRcs
         hold off;
     end
 end
-title(tl, sprintf('Cnd n. %i, "%s", n=%i', cndNmb, cndString, nSubjs), ...
+title(tl, sprintf('Cnd n. %i, "%s"', cndNmb, cndString), ...
     'FontName', 'Helvetica', 'FontSize', 18);
 end
