@@ -1,4 +1,4 @@
-function Y = rcaBase_Project(data,W)
+function Y = rcaProject(data,W)
 % Y=RCAPROJECT(DATA3D,W)
 %
 % data3D: array of epoched data (samples x channels x trials)

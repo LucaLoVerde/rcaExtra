@@ -1,6 +1,5 @@
 function [proj, subj, w] = averageProjectSweep(dataIn, nBins)
 % Alexandra Yakovleva, Stanford University 2012-1020
-% modified by LLV
     nCnd = size(dataIn, 2);
     proj = cell(nCnd, 1);
     subj = cell(size(dataIn));
@@ -17,5 +16,5 @@ function [proj, subj, w] = averageProjectSweep(dataIn, nBins)
         [s, w] = cellfun(@(x) averageBinsTrialsSweep(x), dataIn(:, c), 'uni', false);
         subj(:, c) = s;
         weights(:, c) = w;
-    end
+    end   
 end
