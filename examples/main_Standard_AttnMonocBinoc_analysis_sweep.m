@@ -59,7 +59,7 @@ for condIdx = 1:nConditions
 end
 
 % LLV: average sweeps together
-rcResult_avgs = cellfun(@(x) rcaExtra_computeSweepAverages(x), rcResult_condition);
+% rcResult_avgs = cellfun(@(x) rcaExtra_computeSweepAverages(x), rcResult_condition);
 % plot results
 % LLV: beta sweep amplitude and phase plots plus topos for all conds
 % rcaExtra_plotSweepProjAmplitudesSummary_beta(rcResult_avgs(condIdx));
