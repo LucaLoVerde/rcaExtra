@@ -22,6 +22,8 @@ loadSettings = rcaExtra_getDataLoadingSettings(analysisStruct);
 %% put desired parameters here
 
 loadSettings.useBins = 1:10;
+% warning('DEBUGGING: using limited bins');
+% loadSettings.useBins = 1:3;
 loadSettings.useFrequencies = {'1F1', '2F1', '3F1', '4F1'};
 
 %% load data
